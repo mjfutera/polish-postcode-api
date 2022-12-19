@@ -8,17 +8,6 @@ const app = express();
 const mysql = require('mysql');
 const {db_details} = require('./important_data');
 
-app.get('/', function (req, res) {
-   const connection = mysql.createConnection(db_details);
-   connection.connect();
-   connection.query('SELECT postcode, location FROM pl_postcodes WHERE postcode="33-101" LIMIT 1;', function (error, results, _fields) {
-     if (error) throw error;
-     res.send(results[0]);
-     res.end();
-   });
-   connection.end();
-})
-
 app.get('/:pc', function (req, res) {
     const code = req.params.pc
     const resultObject = {
